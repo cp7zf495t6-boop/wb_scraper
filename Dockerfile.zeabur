@@ -1,0 +1,26 @@
+# Wildberries Review Scraper - Dockerfile for Zeabur
+# 此文件用于 Zeabur 云平台部署
+
+FROM node:18-alpine
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制依赖文件
+COPY package.backend.json ./package.json
+
+# 安装依赖
+RUN npm install
+
+# 复制源代码
+COPY server.js ./
+
+# 设置环境变量
+ENV PORT=3001
+ENV NODE_ENV=production
+
+# 暴露端口
+EXPOSE 3001
+
+# 启动命令
+CMD ["node", "server.js"]
